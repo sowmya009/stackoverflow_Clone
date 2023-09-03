@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const QuestionDB = require("../models/Question");
 
 router.post("/", async (req, res) => {
@@ -24,28 +24,9 @@ router.post("/", async (req, res) => {
     });
 });
 
-// router.get("/", async (req, res) => {
-//   const questions = await QuestionDB.find({});
-
-//   try {
-//     if (questions) {
-//       res.status(200).send({ questions });
-//     } else {
-//       res.status(400).send({
-//         message: "question not found",
-//       });
-//     }
-//   } catch (e) {
-//     res.status(400).send({
-//       message: "Error in getting question",
-//     });
-//   }
-// });
-
 router.get("/:id", async (req, res) => {
   try {
-    // const question = await QuestionDB.findOne({ _id: req.params.id });
-    // res.status(200).send(question);
+  
     QuestionDB.aggregate([
       {
         $match: { _id: mongoose.Types.ObjectId(req.params.id) },
@@ -67,7 +48,6 @@ router.get("/:id", async (req, res) => {
                 _id: 1,
                 user: 1,
                 answer: 1,
-                // created_at: 1,
                 question_id: 1,
                 created_at: 1,
               },
@@ -103,12 +83,6 @@ router.get("/:id", async (req, res) => {
           as: "comments",
         },
       },
-      // {
-      //   $unwind: {
-      //     path: "$answerDetails",
-      //     preserveNullAndEmptyArrays: true,
-      //   },
-      // },
       {
         $project: {
           __v: 0,
@@ -179,23 +153,14 @@ router.get("/", async (req, res) => {
           {
             $project: {
               _id: 1,
-              // user_id: 1,
-              // answer: 1,
-              // created_at: 1,
-              // question_id: 1,
-              // created_at: 1,
+              
             },
           },
         ],
         as: "answerDetails",
       },
     },
-    // {
-    //   $unwind: {
-    //     path: "$answerDetails",
-    //     preserveNullAndEmptyArrays: true,
-    //   },
-    // },
+    
     {
       $project: {
         __v: 0,
@@ -213,5 +178,4 @@ router.get("/", async (req, res) => {
       res.status(400).send(error);
     });
 });
-
 module.exports = router;

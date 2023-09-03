@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 // const mongoose = require('mongoose')
-const QuestionDB = require("../models/Question");
+const QuestionDB = require("../models/Questions");
 
 router.post("/", async (req, res) => {
   const questionData = new QuestionDB({
@@ -24,23 +24,6 @@ router.post("/", async (req, res) => {
     });
 });
 
-// router.get("/", async (req, res) => {
-//   const questions = await QuestionDB.find({});
-
-//   try {
-//     if (questions) {
-//       res.status(200).send({ questions });
-//     } else {
-//       res.status(400).send({
-//         message: "question not found",
-//       });
-//     }
-//   } catch (e) {
-//     res.status(400).send({
-//       message: "Error in getting question",
-//     });
-//   }
-// });
 
 router.get("/:id", async (req, res) => {
   try {

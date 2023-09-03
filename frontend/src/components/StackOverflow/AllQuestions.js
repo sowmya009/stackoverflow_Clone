@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./css/AllQuestions.css";
 import ReactHtmlParser from "react-html-parser";
 import { Link } from "react-router-dom";
-import { stringAvatar } from "../../utils/Avatar";
+import { stringAvatar } from "../../utils/Avtar";
 
 function AllQuestions({ data }) {
   function truncate(str, n) {
