@@ -4,12 +4,12 @@ import {
     signInWithPopup,
   } from "firebase/auth";
   import React, { useState } from "react";
-  import { useHistory } from "react-router-dom";
+  import { useNavigate } from "react-router-dom";
   import { auth, provider } from "../../firebase";
   import "./index.css";
   
   function Index() {
-    const history = useHistory();
+    const history = useNavigate();
     const [register, setRegister] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -31,11 +31,7 @@ import {
           setLoading(false);
           // console.log(res);
           history.push("/");
-          // return (
-          //   <>
-  
-          //   </>
-          // );
+          
         })
         .catch((error) => {
           setLoading(false);
@@ -55,7 +51,6 @@ import {
       } else {
         signInWithEmailAndPassword(auth, email, password)
           .then((res) => {
-            // console.log(res);
             history.push("/");
             setLoading(false);
           })
@@ -79,7 +74,6 @@ import {
       } else {
         createUserWithEmailAndPassword(auth, email, password)
           .then((res) => {
-            // console.log(res);
             history.push("/");
             setLoading(false);
           })

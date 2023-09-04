@@ -7,7 +7,7 @@ import Editor from "react-quill";
 import axios from "axios";
 import { TagsInput } from "react-tag-input-component";
 import { selectUser } from "../../feature/userSlice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Index() {
   const user = useSelector(selectUser);
@@ -54,11 +54,10 @@ function Index() {
     "video",
   ];
 
-  
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tag, setTag] = useState([]);
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleQuill = (value) => {
     setBody(value);
@@ -77,7 +76,6 @@ function Index() {
       await axios
         .post("/api/question", bodyJSON)
         .then((res) => {
-          // console.log(res.data);
           alert("Question added successfully");
           history.push("/");
         })
@@ -86,6 +84,7 @@ function Index() {
         });
     }
   };
+
   return (
     <div className="add-question">
       <div className="add-question-container">

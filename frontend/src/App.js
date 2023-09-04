@@ -1,9 +1,9 @@
 import "./App.css";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect,
+  useNavigate,
 } from "react-router-dom";
 import StackOverflow from "./components/StackOverflow";
 import Header from "./components/Header";
@@ -44,7 +44,7 @@ function App() {
         user ? (
           <Component {...props} />
         ) : (
-          <Redirect
+          <useNavigate
             to={{
               pathname: "/auth",
               state: {
@@ -61,12 +61,12 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Switch>
+        <Routes>
           <Route exact path="/auth" component={Auth} />
           <PrivateRoute exact path="/" component={StackOverflow} />
           <PrivateRoute exact path="/add-question" component={AddQuestion} />
           <PrivateRoute exact path="/question" component={ViewQuestion} />
-        </Switch>
+        </Routes>
       </Router>
     </div>
   );
